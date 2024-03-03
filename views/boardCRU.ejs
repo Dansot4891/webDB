@@ -1,0 +1,98 @@
+<!--201931541 임명우-->
+<script>
+    function goBack() {
+      window.history.back();
+    }
+</script>
+
+<% if(state==='create' ){ %>
+<div class="container">
+	<h2> 생성</h2>
+	<form action="/board/create_process" method="post">
+		<input type="hidden" name="type_id" value="<%=btname.type_id%>">
+		<input type="hidden" name="loginid" value="<%=loginid%>">
+		<div class="mb-3">
+			<label class="form-label" for="id">제목</label>
+			<input class="form-control" type="text" name="title" style="width:300px;" />
+		</div>
+		<div class="mb-3">
+			<label class="form-label" for="id">작성자</label>
+			<input class="form-control" type="text" name="board.name" value="<%=who%>" style="width:300px;" disabled />
+		</div>
+		<div class="mb-3">
+			<label class="form-label" for="id">내용</label>
+			<textarea class="form-control" name="content" style="width:800px;height: 200px;"></textarea>
+		</div>
+		<div class="mb-3">
+			<label class="form-label" for="id">갱신삭제시 비밀번호</label>
+			<input class="form-control" type="text" name="password" style="width:300px;" />
+		</div>
+		<button class="btn btn-outline-primary btn-sm" type="submit">생성</button>
+	</form>
+</div>
+<% } %>
+<% if(state==='update' ){ %>
+	<% if(board.loginid===loginid || para == '01'){ %>
+		<div class="container">
+			<h2>자세히보기</h2>
+			<form action="/board/update_process" method="post">
+				<input type="hidden" name="type_id" value="<%=btname.type_id%>">
+				<input type="hidden" name="loginid" value="<%=loginid%>">
+				<input type="hidden" name="board_id" value="<%=board.board_id%>">
+				<div class="mb-3">
+					<label class="form-label" for="id">제목</label>
+					<input class="form-control" type="text" value="<%=board.title%>" name="title"  style="width:300px;" />
+				</div>
+				<div class="mb-3">
+					<label class="form-label" for="id">작성자</label>
+					<input class="form-control" type="text" name="name" value="<%=board.name%>" style="width:300px;" disabled />
+				</div>
+				<div class="mb-3">
+					<label class="form-label" for="id">내용</label>
+					<textarea class="form-control" name="content" value="<%=board.content%>" style="width:800px;height: 200px;"><%=board.content%></textarea>
+				</div>
+				<div class="mb-3">
+					<label class="form-label" for="id">갱신삭제시 비밀번호</label>
+					<input class="form-control" type="text" name="password" value="<%=board.ps%>" style="width:300px;" />
+				</div><div class="mb-3" style="text-align: right;">
+				<button class="btn btn-info me-md-2" type="submit">수정</button>
+			</form>		
+				<button type="button" onclick='goBack()' class="btn btn-info me-md-2">목록</button>
+				<form action='/board/delete/<%=board.board_id%>/<%=board.type_id%>' method="get" style="display: inline;">
+					<button class="btn btn-info me-md-2" onclick='if(confirm("정말로 삭제하시겠습니까?")==false){ return false }' type="submit">삭제</button>
+				</form>
+			</div>
+				
+				
+			</div>
+			<div style="text-align: right;"></div>
+		</div>
+	
+	<% }else { %>
+		<div class="container">
+			<h2>자세히보기</h2>
+			
+				<input type="hidden" name="type_id" value="<%=btname.type_id%>">
+				<input type="hidden" name="loginid" value="<%=loginid%>">
+				<input type="hidden" name="board_id" value="<%=board.board_id%>">
+				<div class="mb-3">
+					<label class="form-label" for="id">제목</label>
+					<input class="form-control" type="text" value="<%=board.title%>" name="title"  style="width:300px;" disabled />
+				</div>
+				<div class="mb-3">
+					<label class="form-label" for="id">작성자</label>
+					<input class="form-control" type="text" name="name" value="<%=board.name%>" style="width:300px;" disabled />
+				</div>
+				<div class="mb-3">
+					<label class="form-label" for="id">내용</label>
+					<textarea class="form-control" name="content" value="<%=board.content%>" style="width:800px;height: 200px;" disabled ><%=board.content%></textarea>
+				</div>
+				<div class="mb-3">
+					<label class="form-label" for="id">갱신삭제시 비밀번호</label>
+					<input class="form-control" type="text" name="password" value="<%=board.ps%>" style="width:300px;" disabled />
+				</div>
+				<div style="text-align: right;"><button type="button" onclick='goBack()' class="btn btn-info me-md-2">목록</button></div>
+			
+		</div>
+	<% } %>
+<% } %>

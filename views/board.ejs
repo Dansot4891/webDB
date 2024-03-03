@@ -1,0 +1,15 @@
+<!--201931541 임명우-->
+<% if(btype=='board') { %>
+    <%- tag%>
+    <% var j=1; while (j <=totalPages) { 
+        if(j==pNum){ %>
+        
+        <span style="font-weight : bold;"><%=j%></span> &nbsp;&nbsp;
+        <% } else { %>
+            <span><a href="/board/view/<%=btname.type_id%>/<%=j%>"><%=j%></a></span> &nbsp;&nbsp;
+        <% } 
+        j++ 
+    } %>
+<% } else { %>
+    <%- tag%>
+<% } %>

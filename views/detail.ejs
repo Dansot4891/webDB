@@ -1,0 +1,47 @@
+<!--201931541 임명우-->
+<% if (state === '99') { %>
+    <table class="table table-bordered">
+        <tr>
+            <td rowspan="3" width="800"><img src="<%=merchandise[0].image%>" style="width:300px;height:500px;"></td>
+            <td width="400" height="125"><%=merchandise[0].name%></td>
+        </tr>
+        <tr>
+            <td width="400" height="125"><%=merchandise[0].price%></td>
+        </tr>
+        <tr>
+            <td width="400" height="125"><%=merchandise[0].brand%></td>
+        </tr>
+    </table>
+<% }else { %>
+<table class="table table-bordered">
+    <tr>
+        <td rowspan="4" width="600"><img src="<%=merchandise[0].image%>" style="width:600px;height:500px;"></td>
+        <td width="400" height="125"><%=merchandise[0].name%></td>
+    </tr>
+    <tr>
+        <td width="400" height="125"><%=merchandise[0].price%></td>
+    </tr>
+    <tr>
+        <td width="400" height="125"><%=merchandise[0].brand%></td>
+    </tr>
+    <tr>
+        <td width="400" height="125">
+            <form action="/purchase/detail/<%=merchandise[0].mer_id%>" method="post" style="display: inline;">
+                <input type="hidden" name="mer_id" value="<%=merchandise[0].mer_id%>">
+                <input type="hidden" name="name" value="<%=merchandise[0].name%>">
+                <input type="hidden" name="price" value="<%=merchandise[0].price%>">
+                <input type="hidden" name="brand" value="<%=merchandise[0].brand%>">
+                <input type="hidden" name="cancel" value="N">
+                <input type="hidden" name="payYN" value="Y">
+                <input type="hidden" name="refund" value="N">
+                <button type="submit" style="color: skyblue; background:white;" class="btn btn-info me-md-2">구매</button>
+            </form>
+
+            <form action="/purchase/cart/create_process" method="post" style="display: inline;">
+                <input type="hidden" name="mer_id" value="<%=merchandise[0].mer_id%>">
+                <button type="submit" style="color:  skyblue; background:white;" class="btn btn-info me-md-2">장바구니</button>
+            </form>
+        </td>
+    </tr>
+</table>
+<% } %>

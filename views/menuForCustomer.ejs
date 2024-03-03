@@ -1,0 +1,105 @@
+<!--201931541 임명우-->
+<nav class="navbar navbar-expand-lg bg-body-tertiary bg-dark border-bottom border-body fixed-top" data-bs-theme="dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/shop/all">Gachon</a>
+    
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <!-- 메뉴 시작 -->
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/shop/all">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/shop/0001">의류</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/shop/0002">식품</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/shop/0003">가전</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/shop/0004">도서</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/shop/0005">스포츠</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/shop/0006">자동차</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/shop/0007">생활용품</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/shop/0008">완구</a>
+        </li>
+        <!-- <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            게시판
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">고객센터</a></li>
+            <li><a class="dropdown-item" href="#">후기</a></li>
+            <li><hr class="dropdown-divider"></li>
+              
+          </ul>
+        </li> -->
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            게시판
+          </a>
+          <ul class="dropdown-menu">
+            <% var i=0 
+              while(i < boardtypes.length) 
+              { %>
+            <li><a class="dropdown-item" href="/board/view/<%=boardtypes[i].type_id%>/1"><%-boardtypes[i].title%></a></li>
+            <% i +=1 } %>
+            <li><hr class="dropdown-divider"></li>
+          </ul>
+        </li>
+      </ul>
+      <!-- 메뉴 끝 -->
+
+      <!-- 검색창 시작 -->
+      <form action="/shop/search" class="d-flex" role="search" method="post">
+        <input class="form-control me-2" name="search" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form>
+      <!-- 검색창 끝 -->
+
+      <!-- 로그인 -->
+      <ul class="me-auto mb-2 mb-lg-0">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <button type="button"  data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+          </a>
+          <ul class="dropdown-menu">
+            
+            <% if(logined === 'YES'){ %>
+              <li><a class="dropdown-item" href="/auth/logout_process" onclick='if(confirm("로그아웃 하시겠습니까?")==false){ return false }'>로그아웃</a></li>
+            <% } else { %>
+            <li><a class="dropdown-item" href="/auth/login">로그인</a></li>
+            <li><a class="dropdown-item" href="/person/signup">회원가입</a></li>
+            <li><a class="dropdown-item" href="#">아이디/비번찾기</a></li>
+            <% } %>
+          </ul>
+        </li>
+      </ul>
+      <!-- 로그인 끝 -->
+
+    </div>
+    
+    <nav class="navbar bg-body-tertiary">
+        <button class="btn btn-sm btn-outline-warning me-2" onclick="location.href='http://localhost:3000/purchase/view'" type="button">구매내역</button>
+        <button class="btn btn-sm btn-outline-warning me-2" onclick="location.href='http://localhost:3000/purchase/cart'" type="button">장바구니</button>
+    </nav>
+    
+
+    <nav class="navbar" >
+      <div class="container-fluid text-white"  ><%=who%></div>
+    </nav>
+
+  </div>
+</nav>  

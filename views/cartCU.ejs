@@ -1,0 +1,52 @@
+<!--201931541 임명우-->
+<% if(state==='create') { %>
+    <div class="container">
+        <h2>장바구니 생성</h2>
+        <form action="/purchase/cart/create_process" method="post">
+            <div class="mb-3">
+                <label class="form-label" for="id">상품 선택</label><br>
+                <select name="mer_id" id="id">
+                    <% var i=0; %>
+                        <% while( i < merchandises.length) { %>
+                            <option value="<%=merchandises[i].mer_id%>">
+                                <%=merchandises[i].name%>
+                            </option>
+                            <% i++; %>
+                                <% } %>
+                </select>
+            </div>
+            <button class="btn btn-outline-primary btn-sm" type="submit">담기</button>
+        </form>
+    </div>
+<% }else{ %>
+    <h2>장바구니 수정</h2>
+            <form action="/purchase/cart/update_process/<%=cart[0].cart_id%>" method="post" style="display: inline;">
+            <table class="table table-bordered">
+                <tr>
+                    <td rowspan="2" width="600">
+                            <img src="<%=cart[0].image%>" style="width:600px;height:700px;"></td>
+                    <td width="400" height="125">구매자ID : <%=cart[0].loginid%>
+                    </td>
+                    <input type="hidden" name="loginid" value="<%=cart[0].loginid%>">
+                </tr>
+                <tr>
+                    <td width="400" height="125">
+                        상품 변경 : <select name="mer_id" id="id">
+                            <option value="<%=cart[0].mer_id%>" selected>
+                                <%=cart[0].name%>
+                            </option>
+                            <% var i=0; %>
+                                <% while( i < merchandises.length) { %>
+                                    <option value="<%=merchandises[i].mer_id%>">
+                                        <%=merchandises[i].name%>
+                                    </option>
+                                    <% i++; %>
+                                        <% } %>
+                        </select><br>
+                        가격 : <%=cart[0].price%>
+                    </td>
+                </tr>
+            </table>
+            <div style="text-align: right;"><button type="submit" style="color: skyblue; background:white;" class="btn btn-info me-md-2">수정</button></div>
+            </form>
+    <% } %>

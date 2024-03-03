@@ -1,0 +1,69 @@
+<!--201931541 임명우-->
+<% if(state==='create' ){ %>
+<div class="container">	
+    <h2>코드 입력</h2>
+	<form action="/code/create_process" method="post" >
+		<div class="mb-3">
+			<label class="form-label" for="id">대분류</label> 
+			<input class="form-control" type="text" name="main_id" placeholder="0000" style = "width:300px;" />
+		</div>
+        <div class="mb-3">
+			<label class="form-label" for="id">대분류명</label> 
+			<input class="form-control" type="text" name="main_name" style = "width:300px;" />
+		</div>
+        <div class="mb-3">
+			<label class="form-label" for="id">소분류</label> 
+			<input class="form-control" type="text" name="sub_id" style="width:300px;" />
+		</div>
+        <div class="mb-3">
+			<label class="form-label" for="id">소분류명</label> 
+			<input class="form-control" type="text" name="sub_name" style="width:300px;" />
+		</div>
+        <div class="mb-3">
+			<label class="form-label" for="id">시작일</label> 
+			<input class="form-control" type="text" name="start" id="start" style="width:300px;" />
+		</div>
+        <div class="mb-3">
+			<label class="form-label" for="id">종료일</label> 
+			<input class="form-control" type="text" name="end" id="end" style="width:300px;" />
+		</div>
+        <button class="btn btn-outline-primary btn-sm" type="submit">입력</button>
+  </form>
+</div>
+<% } %>
+<% if(state==='update' ){ %>
+<div class="container">	
+    <h2>코드 수정</h2>
+	<form action="/code/update_process" method="post" >
+		<div class="mb-3">
+			<label class="form-label" for="id">대분류</label><br>
+			<label class="form-label" for="id"><%=code.main_id%></label> 
+			<input class="form-control" type="hidden" name="main_id" value="<%=code.main_id%>" style = "width:300px;" />
+		</div>
+        <div class="mb-3">
+			<label class="form-label" for="id">대분류명</label> 
+			<input class="form-control" type="text" name="main_name" value="<%=code.main_name%>" style = "width:300px;" />
+		</div>
+        <div class="mb-3">
+			<label class="form-label" for="id">소분류</label><br>
+			<label class="form-label" for="id"><%=code.sub_id%></label> 
+			<input class="form-control" type="hidden" name="sub_id" value="<%=code.sub_id%>" style="width:300px;" />
+		</div>
+        <div class="mb-3">
+			<label class="form-label" for="id">소분류명</label> 
+			<input class="form-control" type="text" name="sub_name" value="<%=code.sub_name%>" style="width:300px;" />
+		</div>
+        <div class="mb-3">
+			<label class="form-label" for="id">시작일</label><br>
+			<label class="form-label" for="id"><%=code.start%></label> 
+			<input class="form-control" type="hidden" name="start" id="start" value="<%=code.start%>" style="width:300px;" />
+		</div>
+        <div class="mb-3">
+			<label class="form-label" for="id">종료일</label><br>
+			<label class="form-label" for="id"><%=code.end%></label> 
+			<input class="form-control" type="hidden" name="end" id="end" value="<%=code.end%>" style="width:300px;" />
+		</div>
+        <button class="btn btn-outline-primary btn-sm" type="submit">수정</button>
+  </form>
+</div>
+<% } %>

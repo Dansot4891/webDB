@@ -1,0 +1,47 @@
+<div class="container">	
+	<h2>종류별 게시판 분포 </h2>
+
+	<% var i = 0;
+	   while(i < percentage.length) { %>
+		<input type = "hidden" value = "<%=percentage[i].rate%>" class = "data" name = "rate">
+		<input type = "hidden" value = "<%=percentage[i].type%>" class = "type" name = "rate">
+	<% i += 1 } %> 
+	<canvas id="graph" width="600" height="600" style="background-color: aliceblue"></canvas>
+
+	<script>
+		let data = document.getElementsByClassName("data");
+		let type = document.getElementsByClassName("type");
+		let colors = ["blue", "magenta","green", "orange",  "red", "black", "white"];
+		let canvas = document.getElementById("graph");
+		let context = canvas.getContext("2d");
+
+        type[0].value = "공지사항";
+        type[1].value = "Q&A";
+        type[2].value = "자유게시판";
+        type[3].value = "추첨게시판";
+
+		for(let i = 0; i < data.length; i++){
+			context.font = "20px malgun gothic";
+			context.fillStyle = colors[i];
+			context.fillText(type[i].value + " | " + data[i].value + "%", 20, 20 + 20 * i);                    
+        }
+
+
+		let angle = 0;
+
+
+		for(let i = 0; i < data.length; i++){
+			context.fillStyle = colors[i];
+			context.beginPath();
+			context.moveTo(300, 300);
+			context.arc(300, 300, 210, angle, angle + (Math.PI * 2 * (parseFloat(data[i].value)/100)));
+			context.lineTo(300, 300);
+			context.fill();
+			
+			angle += Math.PI * 2 * (parseFloat(data[i].value)/100);
+			
+		}	
+	</script>
+
+</div>
+

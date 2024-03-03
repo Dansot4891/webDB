@@ -1,0 +1,104 @@
+<!--201931541 임명우-->
+<% if(state==='01' ) { %>
+    <table style="text-align: center;" class="table table-bordered">
+        <thead>
+            <tr>
+                <td>상품</td>
+                <td>ID</td>
+                <td>상품명</td>
+                <td>단가</td>
+                <td>담은날</td>
+                <td>수정 및 삭제</td>
+            </tr>
+        </thead>
+        <tbody>
+            <% var i=0; while (i < carts.length) { %>
+                <tr style="border-bottom: 1px solid #ddd;">
+                    <input type="hidden" name="cancel" value="N">
+                    <input type="hidden" name="payYN" value="Y">
+                    <input type="hidden" name="refund" value="N">
+                    <input type="hidden" name="loginid" value="<%=carts[i].loginid%>">
+                    <input type="hidden" name="mer_id" value="<%=carts[i].mer_id%>">
+                    <input type="hidden" name="price" value="<%=carts[i].price%>">
+                    <td><img src="<%=carts[i].image%>" style="width:100px;height:100px;"></td>
+                    <td>
+                        <%=carts[i].loginid%>
+                    </td>
+                    <td>
+                        <%=carts[i].name%>
+                    </td>
+                    <td>
+                        <%=carts[i].price%>
+                    </td>
+                    <td>
+                        <%=carts[i].date%>
+                    </td>
+                    <td>
+                        <a href="/purchase/cart/update/<%=carts[i].cart_id%>">수정</a>&nbsp
+                        <a href="/purchase/cart/delete_process/<%=carts[i].cart_id%>"
+                            onclick='if(confirm("정말로 삭제하시겠습니까?")==false){ return false }'>삭제</a>
+                    </td>
+                </tr>
+                <% i +=1; } %>
+        </tbody>
+    </table>
+    <% }else { %>
+        <% if (!carts || carts.length===0) { %>
+            <p>자료 없음</p>
+            <% }else { %>
+            <p>구매하시려는 상품의 수량을 입력해주세요.</p>
+            <form action="/purchase/create_process" method="post">
+                <table style="text-align: center;" class="table table-bordered">
+                    <thead>
+                        <tr>
+                            
+                            <td>상품</td>
+                            <td>상품명</td>
+                            <td>단가</td>
+                            <td>담은날</td>
+                            <td>수량</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <input type="hidden" name="state" value="cart">
+                        <% var i=0; while (i < carts.length) { %>
+                            <tr style="border-bottom: 1px solid #ddd;">
+                                <input type="hidden" name="cancel" value="N">
+                                <input type="hidden" name="payYN" value="Y">
+                                <input type="hidden" name="refund" value="N">
+                                <input type="hidden" name="cart_id" value="<%=carts[i].cart_id%>">
+                                <input type="hidden" name="loginid" value="<%=carts[i].loginid%>">
+                                <input type="hidden" name="mer_id" value="<%=carts[i].mer_id%>">
+                                <input type="hidden" name="price" value="<%=carts[i].price%>">
+                                
+                                <td><img src="<%=carts[i].image%>" style="width:100px;height:100px;"></td>
+                                <td>
+                                    <%=carts[i].name%>
+                                </td>
+                                <td>
+                                    <%=carts[i].price%>
+                                </td>
+                                <td>
+                                    <%=carts[i].date%>
+                                </td>
+                                <td><input type="number" name="qty" step="1" min="1" max="<%=carts[i].stock%>"></td>
+                            </tr>
+                            <% i +=1; } %>
+                    </tbody>
+                </table>
+                <div style="text-align: right;"><button type="submit" style="color: skyblue; background:white;"
+                        class="btn btn-info me-md-2">결제</button></div>
+            </form>
+            <% } %>
+        <% } %>
+
+<script>
+    ("input:checkbox").change(function() {
+        if(this.checked) {
+            (this).attr('value','Y');
+        }
+        else{
+            (this).attr('value','N');
+        }
+    });
+</script>
